@@ -35,7 +35,10 @@ public enum Subspec: String, CaseIterable {
   case mlNaturalLanguage = "MLNaturalLanguage"
   case mlNLLanguageID = "MLNLLanguageID"
   case mlNLSmartReply = "MLNLSmartReply"
+  case mlNLTranslate = "MLNLTranslate"
   case mlVision = "MLVision"
+  case mlVisionAutoML = "MLVisionAutoML"
+  case mlVisionObjectDetection = "MLVisionObjectDetection"
   case mlVisionBarcodeModel = "MLVisionBarcodeModel"
   case mlVisionFaceModel = "MLVisionFaceModel"
   case mlVisionLabelModel = "MLVisionLabelModel"
@@ -81,7 +84,39 @@ public enum Subspec: String, CaseIterable {
   /// of frameworks get pulled in.
   public func duplicateFrameworksToRemove() -> [String] {
     switch self {
+    case .abTesting,
+         .adMob,
+         .analytics,
+         .auth,
+         .core,
+         .database,
+         .dynamicLinks,
+         .firestore,
+         .functions,
+         .inAppMessaging,
+         .inAppMessagingDisplay,
+         .messaging,
+         .mlModelInterpreter,
+         .mlNaturalLanguage,
+         .mlNLLanguageID,
+         .mlNLSmartReply,
+         .mlNLTranslate,
+         .performance,
+         .remoteConfig,
+         .storage:
+      return []
+
     case .mlVision:
+      return ["BarcodeDetector.framework",
+              "FaceDetector.framework",
+              "LabelDetector.framework",
+              "TextDetector.framework"]
+    case .mlVisionAutoML:
+      return ["BarcodeDetector.framework",
+              "FaceDetector.framework",
+              "LabelDetector.framework",
+              "TextDetector.framework"]
+    case .mlVisionObjectDetection:
       return ["BarcodeDetector.framework",
               "FaceDetector.framework",
               "LabelDetector.framework",
@@ -114,9 +149,6 @@ public enum Subspec: String, CaseIterable {
               "GoogleMobileVision.framework",
               "LabelDetector.framework",
               "Protobuf.framework"]
-    default:
-      // By default, no folders need to be removed.
-      return []
     }
   }
 
