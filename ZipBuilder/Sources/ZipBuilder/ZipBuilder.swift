@@ -740,7 +740,7 @@ struct ZipBuilder {
         }
 
         // Smart Reply packages Resources separately from other MLKit subspecs.
-        if pod.name == "FirebaseMLNLSmartReply" {
+        if pod.name == "FirebaseMLNLSmartReply" || pod.name == "FirebaseMLNLTranslate" {
           do {
             resourceBundles = try ResourcesManager.createBundleForFoldersInResourcesDirs(
               containedIn: pod.installedLocation, destinationDir: podResourceDir
